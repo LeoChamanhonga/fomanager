@@ -1,0 +1,104 @@
+--users: Armazena informações sobre os usuários do sistema.
+CREATE TABLE
+    users (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        username VARCHAR(255) NOT NULL,
+        password VARCHAR(255) NOT NULL
+    );
+
+--clients: Mantém detalhes sobre os clientes.
+CREATE TABLE
+    clients (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        name VARCHAR(255) NOT NULL,
+        contact_email VARCHAR(255)
+    );
+
+--Armazena informações de localização (latitude, longitude e endereço).
+CREATE TABLE
+    locations (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        latitude DECIMAL(10, 8),
+        longitude DECIMAL(11, 8),
+        address VARCHAR(255)
+    );
+
+--Contém detalhes sobre projetos, incluindo a associação a clientes e locais.
+CREATE TABLE
+    projects (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        name VARCHAR(255) NOT NULL,
+        client_id INT,
+        location_id INT,
+        FOREIGN KEY (client_id) REFERENCES clients (id),
+        FOREIGN KEY (location_id) REFERENCES locations (id)
+    );
+
+--Mantém categorias.
+CREATE TABLE
+    categories (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        name VARCHAR(255) NOT NULL
+    );
+
+CREATE TABLE
+    employees (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        name VARCHAR(255) NOT NULL,
+        email VARCHAR(255) NOT NULL,
+        category_id INT,
+        FOREIGN KEY (category_id) REFERENCES categories (id)
+    );
+
+--ssocia funcionários a categorias.
+CREATE TABLE
+    employee_categories (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        employee_id INT,
+        category_id INT,
+        FOREIGN KEY (employee_id) REFERENCES employees (id),
+        FOREIGN KEY (category_id) REFERENCES categories (id)
+    );
+
+-- Associa funcionários a projetos.
+CREATE TABLE
+    project_employees (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        project_id INT,
+        employee_id INT,
+        FOREIGN KEY (project_id) REFERENCES projects (id),
+        FOREIGN KEY (employee_id) REFERENCES employees (id)
+    );
+
+CREATE TABLE
+    user_roles (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        role_name VARCHAR(255) NOT NULL
+    );
+
+--Mantém informações sobre papéis de usuários.
+CREATE TABLE
+    user_user_roles (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        user_id INT,
+        role_id INT,
+        FOREIGN KEY (user_id) REFERENCES users (id),
+        FOREIGN KEY (role_id) REFERENCES user_roles (id)
+    );
+
+--Associa usuários a papéis.
+--Registra registros de tempo, incluindo a associação a usuários, projetos e categorias.
+CREATE TABLE
+    time_records (
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        start_time DATETIME NOT NULL,
+        end_time DATETIME NOT NULL,
+        hour_type ENUM ('normal', 'hora extra') NOT NULL,
+        date DATE NOT NULL,
+        user_id INT,
+        project_id INT,
+        category_id INT,
+        FOREIGN KEY (user_id) REFERENCES users (id),
+        FOREIGN KEY (project_id) REFERENCES projects (id),
+        FOREIGN KEY (category_id) REFERENCES categories (id)
+    );
