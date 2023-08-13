@@ -45,7 +45,7 @@ const NewProjectForm = () => {
     };
 
     // Enviar a requisição POST para criar o novo projeto
-    axios.post('http://localhost:3000/api/projects', newProject)
+    axios.post('http://localhost:8800/projects', newProject)
       .then(response => {
         console.log('Novo projeto criado:', response.data);
         // Você pode adicionar código aqui para redirecionar ou atualizar a lista de projetos
