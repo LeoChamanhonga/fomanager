@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const NewProjectForm = () => {
   const [projectName, setProjectName] = useState('');
+  const [projectNumber, setProjectNumber] = useState('');
   const [projectDescription, setProjectDescription] = useState('');
   const [selectedClient, setSelectedClient] = useState('');
   const [selectedLocation, setSelectedLocation] = useState('');
@@ -15,7 +16,7 @@ const NewProjectForm = () => {
   }, []);
 
   const fetchClients = () => {
-    axios.get('http://localhost:3000/api/clients')
+    axios.get('http://localhost:8800/clients')
       .then(response => {
         setClients(response.data);
       })
@@ -37,6 +38,7 @@ const NewProjectForm = () => {
   const handleCreateProject = () => {
     const newProject = {
       name: projectName,
+      number: projectNumber,
       description: projectDescription,
       clientId: selectedClient,
       locationId: selectedLocation,
@@ -57,11 +59,19 @@ const NewProjectForm = () => {
     <div>
       <h2>Criar Novo Projeto</h2>
       <div>
-        <label>Nome do Projeto:</label>
+        <label>Nome de Projecto:</label>
         <input
           type="text"
           value={projectName}
           onChange={e => setProjectName(e.target.value)}
+        />
+      </div>
+      <div>
+        <label>Numero do Projeto:</label>
+        <input
+          type="text"
+          value={projectNumber}
+          onChange={e => setProjectNumber(e.target.value)}
         />
       </div>
       <div>
