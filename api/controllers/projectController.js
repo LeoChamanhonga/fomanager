@@ -30,7 +30,7 @@ const projectController = {
   createProject: (req, res) => {
     const { name, client_id, location_id } = req.body;
     db.query(
-      'INSERT INTO projects (name, client_id, location_id) VALUES (?, ?, ?)',
+      'INSERT INTO projects (name, number, client_id, location_id) VALUES (?, ?, ?, ?)',
       [name, client_id, location_id],
       (error, results) => {
         if (error) {
@@ -46,7 +46,7 @@ const projectController = {
     const projectId = req.params.id;
     const { name, client_id, location_id } = req.body;
     db.query(
-      'UPDATE projects SET name = ?, client_id = ?, location_id = ? WHERE id = ?',
+      'UPDATE projects SET name = ?, number = ?, client_id = ?, location_id = ? WHERE id = ?',
       [name, client_id, location_id, projectId],
       (error, results) => {
         if (error) {
