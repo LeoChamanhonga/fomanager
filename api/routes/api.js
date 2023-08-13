@@ -1,5 +1,6 @@
 // routes/api.js
 import express from 'express';
+import { check } from 'express-validator';
 import userController from '../controllers/userController.js';
 import clientController from '../controllers/clientController.js';
 import projectController from '../controllers/projectController.js';
@@ -27,7 +28,19 @@ router.delete('/clients/:id', clientController.deleteClient);
 // Rotas para Projetos
 router.get('/projects', projectController.getAllProjects);
 router.get('/projects/:id', projectController.getProjectById);
-router.post('/projects', projectController.createProject);
+router.post(
+    '/projects',
+    [
+        // Defina as regras de validação para os campos
+        check(name).notEmpty().withMessage('Campo Obrigatorio'),
+        check(number).notEmpty().withMessage('ccc'),
+        check('client_id').notEmpty().withMessage('cccc'),
+        check('location_id').notEmpty().withMessage('gggg'),
+
+    ],
+    
+    projectController.createProject
+);
 router.put('/projects/:id', projectController.updateProject);
 router.delete('/projects/:id', projectController.deleteProject);
 

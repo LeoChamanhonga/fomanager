@@ -1,4 +1,5 @@
 // controllers/projectController.js
+import { validationResult } from 'express-validator';
 import {db} from '../db.js';
 
 const projectController = {
@@ -26,9 +27,20 @@ const projectController = {
       res.json(results[0]);
     });
   },
-
+ // Criar um novo projeto com validações
   createProject: (req, res) => {
+
+     // Defina as validações usando express-validator
+     const erros = validationResult(req);
+     if (!erros.isEmpty()) {
+      return res.status(400).json({ erros: erros.array()});
+     }
+
+
     const { name, number, client_id, location_id } = req.body;
+
+
+    // Realize a inserção no banco de dados
     db.query(
       'INSERT INTO projects (name, number, client_id, location_id) VALUES (?, ?, ?, ?)',
       [name, number , client_id, location_id],
