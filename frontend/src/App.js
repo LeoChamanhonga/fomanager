@@ -7,6 +7,7 @@ import EmployeeList from './components/EmployeeList.js';
 import TimeRecordList from './components/TimeRecordLista.js';
 import ClientManagement from './components/ClientManagement';
 import HomeContainer from './components/HomeContainer.js';
+import NewProjectForm from './components/NewProjectForm.js';
 
 const App = () => {
   const [menuItems] = useState([
@@ -38,6 +39,7 @@ const App = () => {
           <Route path="/employees" element={<EmployeeList />} />
           <Route path="/time_records" element={<TimeRecordList />} />
           <Route path="/" element={<HomeContainer />} />
+          <Route path="/projects/new" element={<NewProjectForm />} />
         </Routes>
       </div>
     </Router>
