@@ -60,6 +60,8 @@ const ClientManagement = () => {
           onChange={e => setNewClientName(e.target.value)}
         />
         <button onClick={handleAddClient}>Adicionar Cliente</button>
+        <button onClick={handleAddClient}>Actualizar Cliente</button>
+        <button onClick={handleAddClient}>Eliminar Cliente</button>
       </div>
     </div>
   );
