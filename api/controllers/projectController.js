@@ -28,26 +28,26 @@ const projectController = {
   },
 
   createProject: (req, res) => {
-    const { name, client_id, location_id } = req.body;
+    const { name, number, client_id, location_id } = req.body;
     db.query(
       'INSERT INTO projects (name, number, client_id, location_id) VALUES (?, ?, ?, ?)',
-      [name, client_id, location_id],
+      [name, number , client_id, location_id],
       (error, results) => {
         if (error) {
-          res.status(500).json({ error: 'Error creating project' });
+          res.status(500).json({ error: 'Erro ao criar. Validar Info' });
           return;
         }
-        res.status(201).json({ id: results.insertId, name });
+        res.status(201).json({ id: results.insertId, name, number, client_id, location_id});
       }
     );
   },
 
   updateProject: (req, res) => {
     const projectId = req.params.id;
-    const { name, client_id, location_id } = req.body;
+    const { name, number, client_id, location_id } = req.body;
     db.query(
       'UPDATE projects SET name = ?, number = ?, client_id = ?, location_id = ? WHERE id = ?',
-      [name, client_id, location_id, projectId],
+      [name, number, client_id, location_id, projectId],
       (error, results) => {
         if (error) {
           res.status(500).json({ error: 'Error updating project' });

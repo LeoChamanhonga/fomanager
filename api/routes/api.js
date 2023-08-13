@@ -6,6 +6,7 @@ import projectController from '../controllers/projectController.js';
 import categoryController from '../controllers/categoryController.js';
 import employeeController from '../controllers/employeeController.js';
 import timeRecordController from '../controllers/timeRecordController.js';
+import locationController from '../controllers/locationController.js';
 
 const router = express.Router();
 
@@ -50,5 +51,12 @@ router.get('/time_records/:id', timeRecordController.getTimeRecordById);
 router.post('/time_records', timeRecordController.createTimeRecord);
 router.put('/time_records/:id', timeRecordController.updateTimeRecord);
 router.delete('/time_records/:id', timeRecordController.deleteTimeRecord);
+
+// Rotas para Localizações
+router.get('/locations', locationController.getAllLocations);
+router.get('/locations/:id', locationController.getLocationById);
+router.post('/locations', locationController.createLocation);
+router.put('/locations/:id', locationController.updateLocation);
+router.delete('/locations/:id', locationController.deleteLocation);
 
 export default router;

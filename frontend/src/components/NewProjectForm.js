@@ -26,7 +26,7 @@ const NewProjectForm = () => {
   };
 
   const fetchLocations = () => {
-    axios.get('http://localhost:3000/api/locations')
+    axios.get('http://localhost:8800/locations')
       .then(response => {
         setLocations(response.data);
       })
@@ -39,7 +39,7 @@ const NewProjectForm = () => {
     const newProject = {
       name: projectName,
       number: projectNumber,
-      description: projectDescription,
+      //description: projectDescription,
       clientId: selectedClient,
       locationId: selectedLocation,
     };
@@ -72,13 +72,6 @@ const NewProjectForm = () => {
           type="text"
           value={projectNumber}
           onChange={e => setProjectNumber(e.target.value)}
-        />
-      </div>
-      <div>
-        <label>Descrição do Projeto:</label>
-        <textarea
-          value={projectDescription}
-          onChange={e => setProjectDescription(e.target.value)}
         />
       </div>
       <div>

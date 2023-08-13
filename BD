@@ -105,3 +105,17 @@ CREATE TABLE
 
 ALTER TABLE `fomanager`.`projects`
 ADD COLUMN `number` VARCHAR(45) NOT NULL DEFAULT '1' AFTER `id`;
+
+ALTER TABLE `fomanager`.`locations`
+DROP COLUMN `longitude`,
+DROP COLUMN `latitude`;
+
+ALTER TABLE `fomanager`.`projects`
+DROP FOREIGN KEY `projects_ibfk_1`,
+DROP FOREIGN KEY `projects_ibfk_2`;
+
+ALTER TABLE `fomanager`.`projects` CHANGE COLUMN `client_id` `client_id` INT NOT NULL,
+CHANGE COLUMN `location_id` `location_id` INT NOT NULL;
+
+ALTER TABLE `fomanager`.`projects` ADD CONSTRAINT `projects_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `fomanager`.`clients` (`id`),
+ADD CONSTRAINT `projects_ibfk_2` FOREIGN KEY (`location_id`) REFERENCES `fomanager`.`locations` (`id`);
