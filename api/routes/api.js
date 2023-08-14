@@ -32,8 +32,8 @@ router.post(
     '/projects',
     [
         // Defina as regras de validação para os campos
-        check(name).notEmpty().withMessage('Campo Obrigatorio'),
-        check(number).notEmpty().withMessage('ccc'),
+        check('name').notEmpty().withMessage('Campo Obrigatorio'),
+        check('number').notEmpty().withMessage('ccc'),
         check('client_id').notEmpty().withMessage('cccc'),
         check('location_id').notEmpty().withMessage('gggg'),
 
